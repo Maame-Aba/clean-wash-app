@@ -1,13 +1,33 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, camel_case_types
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, camel_case_types, must_be_immutable, curly_braces_in_flow_control_structures
 
+import 'package:clean_wash/views/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class Forgot_passwordView extends StatelessWidget {
    Forgot_passwordView({Key? key}) : super(key: key);
+    TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:AppBar(
+        elevation: 0,
+        backgroundColor: (Colors.white),
+        leading: IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignInView()));
+                    },
+                    icon: Icon(Icons.arrow_back_ios_new_rounded,
+                    color: (Colors.blue[600]),)),
+                    title: Text("Forgot Password?",
+                      style: TextStyle(
+                          color: Colors.blue[600],
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold),),), 
+        
       body: ListView(children: [
         Padding(
           padding: const EdgeInsets.all(13),
@@ -15,111 +35,100 @@ class Forgot_passwordView extends StatelessWidget {
             child: Column(
               children: [
                 
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0,10,0,5),
-                    child: Text(
-                      "Forgot Password",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0,0,0,45),
-                  child: Align(
+                // Align(
+                //   alignment: Alignment.topLeft,
+                //   child: Padding(
+                //     padding: const EdgeInsets.fromLTRB(0,10,0,0),
+                //     child: Text(
+                //       "Forgot Password",
+                //       style: TextStyle(
+                //           color: Colors.black,
+                //           fontSize: 24,
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.fromLTRB(0,0,0,40),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                   Align(
                     alignment:Alignment.topLeft,
-                    child: Text(
-                      "Select which contact details should we use to reset your password",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                      child: Text(
+                        "We'll send you password reset instructions",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 19,
+                        ),
                       ),
                     ),
                     
                   ),
-                ),
+                
                   Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                padding: const EdgeInsets.fromLTRB(10, 45, 10, 45),
                 child: Form(
                   child: Column(
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.14,
-                        width: MediaQuery.of(context).size.width * 1,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            shape: BoxShape.rectangle),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text("Email"),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    hintText: "ahmedtanvir687@gmail.com",
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                 children: [
+                     Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Enter your Email Address",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: TextFormField(
+                      controller: emailController,
+                      validator: (value) {
+                        if (value!.isEmpty) return "Email is required";
+                        String pattern = r'\w+@\.w+';
+                        RegExp regex = RegExp(pattern);
+                        if (!regex.hasMatch(value))
+                          return "Please enter a valid email";
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              // borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(10)),
+                          fillColor: Colors.grey[200],
+                          filled: false),
+                    ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 50),
-                child: Form(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.14,
-                        width: MediaQuery.of(context).size.width * 1,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                            shape: BoxShape.rectangle),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text("Phone Number"),
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    hintText: "+880 1787134897",
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                    )),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                  // Align(
+                  //   alignment: Alignment.centerLeft,
+                  //   child: Text("Phone Number",
+                  //       style: TextStyle(
+                  //           color: Colors.black,
+                  //           fontSize: 20,
+                  //           fontWeight: FontWeight.w500)),
+                  // ),
+                  // Padding(
+                  //     padding: const EdgeInsets.symmetric(vertical: 10),
+                  //     child: TextFormField(
+                  //       validator: (value) {
+                  //         if (value!.isEmpty) return "Phone number is required";
+                  //         return null;
+                  //       },
+                  //       decoration: InputDecoration(
+                  //           border: OutlineInputBorder(
+                  //               // borderSide: BorderSide.none,
+                  //               borderRadius: BorderRadius.circular(10)),
+                  //           fillColor: Colors.grey[200],
+                  //           filled: false),
+                  //     )),
                        Padding(
                          padding: const EdgeInsets.fromLTRB(0,30,0,10),
-                         child: button("Continue"),
+                         child: button("Send"),
                        )
-                    ],
-                  ),
+                    
+                 ])
                 ),
               ),
               ],
@@ -133,19 +142,20 @@ class Forgot_passwordView extends StatelessWidget {
   ElevatedButton button(String name) {
   return ElevatedButton(
     onPressed: () {},
+    // ignore: sort_child_properties_last
     child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 100),
+      padding: const EdgeInsets.symmetric(horizontal: 80),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical:10),
         child: Text(
-          "Continue",
+          "Send",
           style: TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
     ),
     style:
-        ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),
+        ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue[600])),
   );
 }
 
